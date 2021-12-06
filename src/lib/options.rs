@@ -1,5 +1,6 @@
 use clap::{ App, Arg, SubCommand };
 use crate::commons::output::Output;
+//use crate::module::scanner::{ scan_ports };
 
 
 pub struct CommandOptions;
@@ -14,10 +15,10 @@ impl CommandOptions {
                 SubCommand::with_name("scan")
                   .about("Provide the IP address of a target. e.g 192.168.10.1")
                   .arg(
-                      Arg::with_name("target")
-                          .index(1)
-                          .value_name("TARGET")
+                      Arg::with_name("domain")
                           .help("Provide the IP address of a target.")
+                          .short("D")
+                          .long("domain")
                   )
                   .arg(
                       Arg::with_name("port")
@@ -47,7 +48,8 @@ impl CommandOptions {
                         std::process::exit(1);
                     },
                 };
-                println!("target value : {}", target);
+                
+                let port: u16 = scan_match.value_of("port").unwrap_or("0").parse().unwrap_or(135);
             },
             ("crawler", Some(crawler_match)) => {
                 let url = match crawler_match.value_of("url") {

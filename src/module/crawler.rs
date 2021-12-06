@@ -1,15 +1,19 @@
+use std::{ time::Duration };
+
 pub struct Crawler {
-    url String
+    delay: Duration,
+    concurrent_number: usize,
+    concurrent_process: usize,
 }
 
 impl Crawler {
-    pub fn new(&self, url: &str) -> Crawler {
-        Crawler{
-            url,
+    pub fn new(delay: Duration, concurrent_number: usize, concurrent_process: usize) -> Self {
+        Crawler {
+            delay,
+            concurrent_number,
+            concurrent_process,
         }
     }
 
-    pub is_url(&self, url: &str) -> bool {
-        false
-    }
+    pub fn crawler(&self, url: String) {}
 }
